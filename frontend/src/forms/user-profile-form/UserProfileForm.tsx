@@ -10,7 +10,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { User } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,16 +27,21 @@ const formSchema = z.object({
 type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
+  currentUser: User;
   onSave: (userProfileData: UserFormData) => void;
   isLoading: boolean;
 };
 
-const userProfileForm = ({ onSave, isLoading }: Props) => {
+const userProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
+    defaultValues: currentUser,
   });
 
-  const biruk: string = "bbuurraa4@gmail.com";
+  useEffect(() => {
+    form.reset(currentUser);
+  }, [currentUser, form]);
+
 
   return (
     <Form {...form}>
@@ -53,7 +60,6 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
         <FormField
           control={form.control}
           name="email"
-          defaultValue={biruk}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
@@ -68,7 +74,6 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
         <FormField
           control={form.control}
           name="name"
-          defaultValue=""
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -84,7 +89,6 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
           <FormField
             control={form.control}
             name="addressLine1"
-            defaultValue=""
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Address Line 1</FormLabel>
@@ -99,7 +103,6 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
           <FormField
             control={form.control}
             name="city"
-            defaultValue=""
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>City</FormLabel>
@@ -114,7 +117,6 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
           <FormField
             control={form.control}
             name="country"
-            defaultValue=""
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Country</FormLabel>
