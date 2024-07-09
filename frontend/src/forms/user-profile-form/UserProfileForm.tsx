@@ -34,6 +34,8 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
     resolver: zodResolver(formSchema),
   });
 
+  const biruk: string = "bbuurraa4@gmail.com";
+
   return (
     <Form {...form}>
       <form
@@ -51,11 +53,12 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
         <FormField
           control={form.control}
           name="email"
+          defaultValue={biruk}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} disabled className="bg-white" />
+                <Input {...field} disabled className="bg-white " />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -65,6 +68,7 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
         <FormField
           control={form.control}
           name="name"
+          defaultValue=""
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
@@ -80,6 +84,7 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
           <FormField
             control={form.control}
             name="addressLine1"
+            defaultValue=""
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Address Line 1</FormLabel>
@@ -94,6 +99,7 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
           <FormField
             control={form.control}
             name="city"
+            defaultValue=""
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>City</FormLabel>
@@ -108,6 +114,7 @@ const userProfileForm = ({ onSave, isLoading }: Props) => {
           <FormField
             control={form.control}
             name="country"
+            defaultValue=""
             render={({ field }) => (
               <FormItem className="flex-1">
                 <FormLabel>Country</FormLabel>
