@@ -42,7 +42,6 @@ const userProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
     form.reset(currentUser);
   }, [currentUser, form]);
 
-
   return (
     <Form {...form}>
       <form
