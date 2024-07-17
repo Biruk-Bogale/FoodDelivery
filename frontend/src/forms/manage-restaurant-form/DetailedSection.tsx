@@ -26,7 +26,7 @@ function DetailedSection() {
         name="restaurantName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>Restaurant Name</FormLabel>
             <FormControl>
               <Input {...field} className="bg-white" />
             </FormControl>
