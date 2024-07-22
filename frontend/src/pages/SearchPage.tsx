@@ -11,7 +11,7 @@ function SearchPage() {
       <span>
         {results?.data.map((restaurant) => (
           <span>
-            found - {restaurant.restaurantName},{restaurant.city}
+            found - {restaurant.restaurantName},{restaurant.city}//
           </span>
         ))}
       </span>
