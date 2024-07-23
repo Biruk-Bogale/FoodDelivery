@@ -1,11 +1,35 @@
 import { useSearchRestaurant } from "@/api/RestaurantApi";
+import SearchBar, { searchForm } from "@/components/SearchBar";
 import SearchResultCard from "@/components/SearchResultCard";
 import SearchResultInfo from "@/components/SearchResultInfo";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+
+export type SearchState = {
+  searchQuery: string;
+};
 
 function SearchPage() {
   const { city } = useParams();
-  const { results, isLoading } = useSearchRestaurant(city);
+  const [searchState, setSearchState] = useState<SearchState>({
+    searchQuery: "",
+  });
+
+  const { results, isLoading } = useSearchRestaurant(searchState, city);
+
+  const setSearchQuery = (searchFormData: searchForm) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      searchQuery: searchFormData.searchQuery,
+    }));
+  };
+
+  const resetSearch = () => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      searchQuery: "",
+    }));
+  };
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -22,13 +46,19 @@ function SearchPage() {
       <div id="cuisines-list">Insert cuisines here :)</div>
 
       <div id="main-content" className="flex flex-col gap-5">
+        <SearchBar
+          searchQuery={searchState.searchQuery}
+          onSubmit={setSearchQuery}
+          placeHolder="Search by Cuisine or Restaurant Name"
+          onReset={resetSearch}
+        />
         <SearchResultInfo total={results?.pagination?.total} city={city} />
         {results.data.map((restaurant) => (
           <SearchResultCard restaurant={restaurant} />
         ))}
       </div>
 
-      {/*  */} 
+      {/*  */}
     </div>
   );
 }
