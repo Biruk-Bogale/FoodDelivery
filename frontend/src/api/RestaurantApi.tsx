@@ -12,6 +12,7 @@ export const useSearchRestaurant = (
     const params = new URLSearchParams();
 
     params.set("searchQuery", searchState.searchQuery);
+    params.set("page", searchState.page.toString());
 
     const response = await fetch(
       `${API_BASE_URL}/api/restaurant/search/${city}?${params.toString()}`
@@ -23,13 +24,13 @@ export const useSearchRestaurant = (
     return response.json();
   };
 
-  const {
-    data: results,
-    isError,
-    isLoading,
-  } = useQuery(["searchRestaurant", searchState], createSearchRequest, {
-    enabled: !!city,
-  });
+  const { data: results, isLoading } = useQuery(
+    ["searchRestaurant", searchState],
+    createSearchRequest,
+    {
+      enabled: !!city,
+    }
+  );
 
   return {
     results,
