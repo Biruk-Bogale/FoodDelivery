@@ -8,11 +8,15 @@ import ManageRestaurantForm from "@/forms/manage-restaurant-form/ManageRestauran
 function ManageRestaurantPage() {
   const { createRestaurant, isLoading: isCreateLoading } =
     useCreateMyRestaurant();
-  const { restaurant } = useGetMyRestaurant();
+  const { restaurant, isLoading: isGetLoading } = useGetMyRestaurant();
   const { updateRestaurant, isLoading: isUpdateLoading } =
     useUpdateMyRestaurant();
 
   const isEditing = !!restaurant;
+
+  if (isGetLoading) {
+    return <>Loading...</>;
+  }
 
   return (
     <ManageRestaurantForm
