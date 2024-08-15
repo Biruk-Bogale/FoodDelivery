@@ -36,6 +36,6 @@ app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute);
 app.use("/api/restaurant", restaurantRoute);
 
-app.listen(7777, () => {
-  console.log("server started on localhost:7777");
+app.listen(8888, () => {
+  console.log("server started on localhost:8888");
 });

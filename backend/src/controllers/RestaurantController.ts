@@ -42,7 +42,10 @@ const searchRestaurants = async (req: Request, res: Response) => {
       ];
     }
 
+    // the results that the UI is going to see per page
     const pageSize = 10;
+
+    // how many result to skip based on the page and the page size
     const skip = (page - 1) * pageSize;
 
     const restaurant = await Restaurant.find(query)
@@ -52,7 +55,6 @@ const searchRestaurants = async (req: Request, res: Response) => {
       .lean();
 
     const total = await Restaurant.countDocuments(query);
-
 
     const response = {
       data: restaurant,
