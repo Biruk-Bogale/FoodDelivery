@@ -3,12 +3,14 @@ import { Restaurant } from "@/types";
 import { CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
+import { Trash } from "lucide-react";
 
 type Props = {
   restaurant: Restaurant;
   cartItems: CartItem[];
+  removeFromCart: (cartItem: CartItem) => void;
 };
-function OrderSummary({ cartItems, restaurant }: Props) {
+function OrderSummary({ cartItems, restaurant, removeFromCart }: Props) {
   const getTotalCost = () => {
     const totalInPence = cartItems.reduce(
       (total, cartItem) => total + cartItem.price * cartItem.quantity,
@@ -30,6 +32,7 @@ function OrderSummary({ cartItems, restaurant }: Props) {
       </CardHeader>
       <CardContent className="flex flex-col gap-5">
         {cartItems.map((item) => (
+      <>
           <div className="flex justify-between">
             <span>
               <Badge variant={"outline"} className="mr-2">
@@ -37,12 +40,22 @@ function OrderSummary({ cartItems, restaurant }: Props) {
               </Badge>
               {item.name}
             </span>
-            <span className="flex items-center gap-1">
-              £{((item.price * item.quantity) / 100).toFixed(2)}
-            </span>
+            <div className="flex flex-row items-center gap-2">
+              <span className="flex items-center gap-1">
+                £{((item.price * item.quantity) / 100).toFixed(2)}
+              </span>{" "}
+              <Trash
+                className="cursor-pointer"
+                color="red"
+                size={20}
+                onClick={() => removeFromCart(item)}
+              />
+            </div>
           </div>
+         
+      </>
         ))}
-        <Separator />
+         <Separator />
         <div className="flex justify-between">
           <span>Delivery</span>
           <span>£{(restaurant.deliveryPrice / 100).toFixed(2)}</span>

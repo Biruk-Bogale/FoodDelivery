@@ -54,6 +54,16 @@ function DetailPage() {
     });
   };
 
+  const removeFromCart = (cartItem: CartItem) => {
+    setCartItems((prevCartItem) => {
+      const updatedCartItems = prevCartItem.filter(
+        (item) => cartItem._id !== item._id
+      );
+
+      return updatedCartItems;
+    });
+  };
+
   if (isLoading || !restaurant) {
     return "Loading...";
   }
@@ -67,7 +77,7 @@ function DetailPage() {
         />
       </AspectRatio>
 
-      <div className="grid md:grid-cols-[4fr_2fr] md:px-32">
+      <div className="grid md:grid-cols-[4fr_2fr] md:px-32 gap-5">
         <div className="flex flex-col gap-4">
           <RestaurantInfo restaurant={restaurant} />
           <span className="text-2xl font-bold tracking-tight">Menu</span>
@@ -80,7 +90,7 @@ function DetailPage() {
         </div>
         <div>
           <Card>
-            <OrderSummary restaurant={restaurant} cartItems={cartItems} />
+            <OrderSummary restaurant={restaurant} cartItems={cartItems} removeFromCart = {removeFromCart} />
           </Card>
         </div>
       </div>
