@@ -32,7 +32,6 @@ function OrderSummary({ cartItems, restaurant, removeFromCart }: Props) {
       </CardHeader>
       <CardContent className="flex flex-col gap-5">
         {cartItems.map((item) => (
-      <>
           <div className="flex justify-between">
             <span>
               <Badge variant={"outline"} className="mr-2">
@@ -40,22 +39,18 @@ function OrderSummary({ cartItems, restaurant, removeFromCart }: Props) {
               </Badge>
               {item.name}
             </span>
-            <div className="flex flex-row items-center gap-2">
-              <span className="flex items-center gap-1">
-                £{((item.price * item.quantity) / 100).toFixed(2)}
-              </span>{" "}
+            <span className="flex items-center gap-1">
+              £{((item.price * item.quantity) / 100).toFixed(2)}{" "}
               <Trash
                 className="cursor-pointer"
                 color="red"
                 size={20}
                 onClick={() => removeFromCart(item)}
               />
-            </div>
+            </span>
           </div>
-         
-      </>
         ))}
-         <Separator />
+        <Separator />
         <div className="flex justify-between">
           <span>Delivery</span>
           <span>£{(restaurant.deliveryPrice / 100).toFixed(2)}</span>
