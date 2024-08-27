@@ -21,6 +21,7 @@ type CheckoutSessionRequest = {
 };
 
 const createCheckoutSession = async (req: Request, res: Response) => {
+
   try {
     const checkoutSessionRequest: CheckoutSessionRequest = req.body;
 
@@ -52,7 +53,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
 
     res.json({ url: session.url });
   } catch (error: any) {
-    console.log(error);
+    console.log(error.message);
 
     res.status(500).json({ message: error.raw.message });
   }
@@ -125,5 +126,5 @@ const createSession = async (
 };
 
 export default {
-  createCheckoutSession
-}
+  createCheckoutSession,
+};
