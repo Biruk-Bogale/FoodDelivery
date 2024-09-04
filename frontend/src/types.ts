@@ -60,6 +60,6 @@ export type Order = {
   };
   totalAmount: number;
   status: OrderStatus;
-  createdAT: string;
+  createdAt: string;
   restaurantId: string;
 };
