@@ -23,7 +23,6 @@ function ManageRestaurantPage() {
     return <>Loading...</>;
   }
 
-
   return (
     <Tabs defaultValue="orders">
       <TabsList>
@@ -35,8 +34,8 @@ function ManageRestaurantPage() {
         className="space-y-5 bg-gray-50 pg-10 rounded-lg"
       >
         <h2 className="text-2xl font-bold">{orders?.length} active orders</h2>
-        {orders?.map((order) => (
-          <OrderItemCard order={order} />
+        {orders?.map((order, i) => (
+          <OrderItemCard key={i} order={order} />
         ))}
       </TabsContent>
       <TabsContent value="manage-restaurant">

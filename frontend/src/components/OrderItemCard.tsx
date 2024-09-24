@@ -75,8 +75,8 @@ function OrderItemCard({ order }: Props) {
       </CardHeader>
       <CardContent className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          {order.cartItems.map((cartItem) => (
-            <span>
+          {order.cartItems.map((cartItem, i) => (
+            <span key={i}>
               <Badge variant="outline" className="mr-2">
                 {cartItem.quantity}
               </Badge>
@@ -95,8 +95,10 @@ function OrderItemCard({ order }: Props) {
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent position="popper">
-              {ORDER_STATUS.map((status) => (
-                <SelectItem value={status.value}>{status.label}</SelectItem>
+              {ORDER_STATUS.map((status, i) => (
+                <SelectItem key={i} value={status.value}>
+                  {status.label}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>

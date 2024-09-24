@@ -2,7 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import LoadingButton from "./LoadingButton";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
 import UserProfileForm, {
   UserFormData,
 } from "@/forms/user-profile-form/UserProfileForm";
@@ -47,12 +47,13 @@ function CheckOutButton({ onCheckout, disabled, isLoading }: Props) {
 
   return (
     <Dialog>
+      <DialogTitle className="hidden">00</DialogTitle>
       <DialogTrigger asChild>
         <Button disabled={disabled} className="bg-orange-500 flex-1">
           Go To Checkout
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[425px] md:min-w-[700px] bg-gray-50">
+      <DialogContent aria-describedby="" className="max-w-[425px] md:min-w-[700px] bg-gray-50">
         <UserProfileForm
           currentUser={currentUser}
           onSave={onCheckout}

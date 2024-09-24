@@ -4,7 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
+
 
 type Props = {
   onChange: (value: string) => void;
@@ -32,13 +32,12 @@ function SortOptionDropdowm({ onChange, sortOption }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <Button variant={"outline"} className="w-full">
-          Sort by: {selectedSortLable}
-        </Button>
+        <div className="w-full">Sort by: {selectedSortLable}</div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {SORT_OPTION.map((option) => (
+        {SORT_OPTION.map((option, i) => (
           <DropdownMenuItem
+            key={i}
             className="cursor-pointer"
             onClick={() => onChange(option.value)}
           >

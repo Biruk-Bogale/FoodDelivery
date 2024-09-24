@@ -10,6 +10,7 @@ type Props = {
 function SearchResultCard({ restaurant }: Props) {
   return (
     <Link
+      key={restaurant._id}
       to={`/detail/${restaurant._id}`}
       className="grid lg:grid-cols-[2fr_3fr] gap-5 group"
     >
@@ -26,7 +27,7 @@ function SearchResultCard({ restaurant }: Props) {
         <div id="card-content" className="grid md:grid-cols-2 gap-2">
           <div className="flex flex-row flex-wrap">
             {restaurant.cuisines.map((item, index) => (
-              <span className="flex">
+              <span className="flex" key={index}>
                 <span>{item}</span>
                 {index < restaurant.cuisines.length - 1 && <Dot />}
               </span>

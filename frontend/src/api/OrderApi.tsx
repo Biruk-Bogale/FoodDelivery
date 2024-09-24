@@ -69,7 +69,7 @@ export const useCreateCheckoutSession = () => {
         body: JSON.stringify(checkoutSessionRequest),
       }
     );
-    console.log(response);
+  
     if (!response.ok) {
       throw new Error("Unable to create checkout session");
     }
